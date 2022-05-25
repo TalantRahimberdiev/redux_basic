@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { increment, decrement, incrementByValue } from "./slice1"
+import { useDispatch, useSelector } from "react-redux"
+import Home from "./home"
+
+export default function App() {
+	const result = useSelector(state => state.reducer1.k)
+	const dispatch = useDispatch()
+	return (
+		<div>
+			<button onClick={() => dispatch(increment())}>+</button>
+			<button onClick={() => dispatch(decrement())}>-</button>
+			<input
+				onChange={(event) => dispatch(incrementByValue(+event.target.value))}
+			/>
+			<p>{result}</p>
+			<hr></hr>
+			<Home />
+		</div>
+	)
 }
-
-export default App;
